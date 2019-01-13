@@ -1,7 +1,17 @@
 class Github {
     constructor() {
-        this.client_id = 'fd31202c3e40a2f9edee';
-        this.client_secret = '6d8086c8595d6b753232a411d066fd951359dc01';
+        fetch('./apikeys.json')
+            .then(response => response.json())
+                .then(data => 
+                    {
+                        this.client_id = data.client_id;
+                        this.client_secret = data.client_id
+                    })
+                    .catch(err => 
+                    {
+                        console.log("apiKeys not loaded. Please check apikeys.json file")
+                    });
+
         this.repos_count = 5;
         this.repos_sort = 'created: asc';
     }
